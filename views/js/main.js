@@ -453,6 +453,7 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
     var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+  // Set the new width for each of the pizzaContainers
     for (var i = 0; i < randomPizzaContainerLength; i++) {
       document.getElementsByClassName("randomPizzaContainer")[i].style.width = newwidth;
     }
@@ -505,6 +506,9 @@ function updatePositions() {
 
   var items = document.getElementsByClassName('mover');
   var numItems = items.length;
+  console.log(document.body.scrollTop);
+  
+// Each pizza picture will move horizontally based upon a sin wave and the scrollTop position
   for (var i = 0; i < numItems; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
