@@ -424,6 +424,7 @@ var resizePizzas = function(size) {
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
+    // "querySelector" changed to "getElementById"
     var windowwidth = document.getElementById("randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
 
@@ -449,6 +450,8 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
+  // "querySelectorAll" changed to "getElementsByClassName"
+  // Added var randomPizzaContainerLength so that the function does not need to calculate this each time the function is called
   var randomPizzaContainerLength = document.getElementsByClassName("randomPizzaContainer").length;
   function changePizzaSizes(size) {
     var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
@@ -471,6 +474,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+// "querySelector" changed to "getElementById"
 var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -504,9 +508,10 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  // added 'var numItems = items.length' so I could use numItems in for loop
+  // "querySelectorAll" changed to "getElementsByClassName"
   var items = document.getElementsByClassName('mover');
   var numItems = items.length;
-  console.log(document.body.scrollTop);
   
 // Each pizza picture will move horizontally based upon a sin wave and the scrollTop position
   for (var i = 0; i < numItems; i++) {
@@ -531,6 +536,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  // Changed # of sliding pizzas to 30.  To see all 200 sliding pizzas, the menu was unreadable.
   for (var i = 0; i < 30; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -539,6 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    // "querySelector" changed to "getElementById"
     document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
